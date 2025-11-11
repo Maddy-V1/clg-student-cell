@@ -3,8 +3,6 @@ import {
   Users,
   Bell,
   FileText,
-  HelpCircle,
-  Upload,
   Mail,
   Settings,
   GraduationCap
@@ -14,8 +12,6 @@ const navItems = [
   { path: '/admin/students', label: 'Student Data', icon: Users },
   { path: '/admin/notices', label: 'Notices', icon: Bell },
   { path: '/admin/forms', label: 'Frequent Forms', icon: FileText },
-  { path: '/admin/helpdesk', label: 'Helpdesk', icon: HelpCircle },
-  { path: '/admin/bulk-upload', label: 'Bulk Upload', icon: Upload },
   { path: '/admin/email', label: 'Email Broadcast', icon: Mail },
   { path: '/admin/settings', label: 'Settings', icon: Settings },
 ];
@@ -25,6 +21,20 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 bg-white border-r border-gray-200 min-h-screen">
+      <div className="px-4 pt-4 pb-2 border-b border-gray-200">
+        <div className="flex items-center justify-between gap-3">
+          <img
+            src="/logos/usict.svg"
+            alt="USICT"
+            className="h-10 w-10 rounded"
+          />
+          <img
+            src="/logos/ggsipu.svg"
+            alt="GGSIPU"
+            className="h-10 w-10 rounded"
+          />
+        </div>
+      </div>
       <nav className="p-4">
         <ul className="space-y-2">
           {navItems.map((item) => {

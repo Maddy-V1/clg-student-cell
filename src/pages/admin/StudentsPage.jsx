@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, Upload } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import StudentsTable from '../../components/StudentsTable';
 import { createStudent } from '../../api/stubs.js';
@@ -8,9 +8,12 @@ const branches = ['CSE', 'IT', 'CSE AI', 'CSE DS', 'ECE'];
 const batches = ['24-28', '25-29'];
 const sections = ['1', '2'];
 
+import BulkUploadPage from './BulkUploadPage.jsx';
+
 export default function StudentsPage() {
   const { students, reloadStudents } = useApp();
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showBulkInsideModal, setShowBulkInsideModal] = useState(false);
   const [formData, setFormData] = useState({
     roll: '',
     firstName: '',
@@ -105,17 +108,42 @@ export default function StudentsPage() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">Add New Student</h2>
-              <button
-                onClick={() => setShowAddModal(false)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-                aria-label="Close modal"
-              >
-                ×
-              </button>
+              <h2 className="text-2xl font-bold text-gray-900">
+                {showBulkInsideModal ? 'Bulk Upload Students' : 'Add New Student'}
+              </h2>
+              <div className="flex items-center gap-3">
+                {!showBulkInsideModal && (
+                  <button
+                    onClick={() => setShowBulkInsideModal(true)}
+                    className="btn-secondary flex items-center gap-2"
+                  >
+                    <Upload size={18} />
+                    Bulk Upload
+                  </button>
+                )}
+                {showBulkInsideModal && (
+                  <button
+                    onClick={() => setShowBulkInsideModal(false)}
+                    className="btn-secondary"
+                  >
+                    Add Manually
+                  </button>
+                )}
+                <button
+                  onClick={() => {
+                    setShowAddModal(false);
+                    setShowBulkInsideModal(false);
+                  }}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  aria-label="Close modal"
+                >
+                  ×
+                </button>
+              </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6">
+            {!showBulkInsideModal ? (
+              <form onSubmit={handleSubmit} className="p-6">
               <div className="space-y-6">
                 {/* Personal Information Section */}
                 <div>
@@ -300,7 +328,10 @@ export default function StudentsPage() {
               <div className="mt-6 flex justify-end gap-3">
                 <button
                   type="button"
-                  onClick={() => setShowAddModal(false)}
+                  onClick={() => {
+                    setShowAddModal(false);
+                    setShowBulkInsideModal(false);
+                  }}
                   className="btn-secondary"
                 >
                   Cancel
@@ -310,6 +341,11 @@ export default function StudentsPage() {
                 </button>
               </div>
             </form>
+            ) : (
+              <div className="p-6">
+                <BulkUploadPage />
+              </div>
+            )}
           </div>
         </div>
       )}

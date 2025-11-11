@@ -4,7 +4,6 @@ import AdminShell from './components/AdminShell';
 import StudentsPage from './pages/admin/StudentsPage';
 import NoticesPage from './pages/admin/NoticesPage';
 import FormsPage from './pages/admin/FormsPage';
-import HelpdeskPage from './pages/admin/HelpdeskPage';
 import BulkUploadPage from './pages/admin/BulkUploadPage';
 import EmailPage from './pages/admin/EmailPage';
 import SettingsPage from './pages/admin/SettingsPage';
@@ -23,7 +22,6 @@ function App() {
             <Route path="students/:roll" element={<StudentDetailPage />} />
             <Route path="notices" element={<NoticesPage />} />
             <Route path="forms" element={<FormsPage />} />
-            <Route path="helpdesk" element={<HelpdeskPage />} />
             <Route path="bulk-upload" element={<BulkUploadPage />} />
             <Route path="email" element={<EmailPage />} />
             <Route path="settings" element={<SettingsPage />} />
@@ -31,7 +29,6 @@ function App() {
           <Route path="/student" element={<ComingSoon />} />
           <Route path="/student/notices" element={<ComingSoon />} />
           <Route path="/student/forms" element={<ComingSoon />} />
-          <Route path="/student/helpdesk" element={<ComingSoon />} />
           <Route path="/" element={<Navigate to="/admin" replace />} />
         </Routes>
       </BrowserRouter>
