@@ -36,6 +36,9 @@ jobs:
           # Use repo name as base path automatically: "/<repo-name>/"
           VITE_BASE: "/${{ github.event.repository.name }}/"
         run: npm run build
+      
+      - name: Create SPA fallback for GitHub Pages
+        run: cp dist/index.html dist/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

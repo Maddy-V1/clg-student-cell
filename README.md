@@ -156,3 +156,11 @@ npm run preview  # preview the build locally
 - Build command: `npm run build`
 - Output directory: `dist`
 - No special config needed. For Netlify, enable SPA fallback (“Redirect all traffic to index.html”) or add a `_redirects` file with `/* /index.html 200`.
+
+#### Vercel notes
+- A `vercel.json` is included that rewrites all routes to `/` so deep links like `/admin/students` work without 404s.
+- Ensure project settings:
+  - Framework preset: “Vite”
+  - Build Command: `npm run build`
+  - Output Directory: `dist`
+  - No `VITE_BASE` override needed (base is `/` on Vercel).
