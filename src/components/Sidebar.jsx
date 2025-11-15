@@ -24,14 +24,14 @@ export default function Sidebar() {
       <div className="px-4 pt-4 pb-2 border-b border-gray-200">
         <div className="flex items-center justify-between gap-3">
           <img
-            src="/logos/usict.svg"
+            src="/logos/usict.png"
             alt="USICT"
-            className="h-10 w-10 rounded"
+            className="h-12 w-150 rounded"
           />
           <img
             src="/logos/ggsipu.svg"
             alt="GGSIPU"
-            className="h-10 w-10 rounded"
+            className="h-10 w-15 rounded"
           />
         </div>
       </div>
