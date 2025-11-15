@@ -25,13 +25,8 @@ export async function getStudents(query = '') {
   
   const searchTerm = query.trim().toLowerCase();
   return students.filter(s => {
-    const firstName = (s.firstName || '').toLowerCase();
-    const lastName = (s.lastName || '').toLowerCase();
-    const fullName = `${firstName} ${lastName}`.trim();
-    return firstName.includes(searchTerm) ||
-           lastName.includes(searchTerm) ||
-           fullName.includes(searchTerm) ||
-           (s.name && s.name.toLowerCase().includes(searchTerm)) ||
+    const name = (s.name || '').toLowerCase();
+    return name.includes(searchTerm) ||
            s.roll.toLowerCase().includes(searchTerm) ||
            s.phone.includes(searchTerm) ||
            s.email.toLowerCase().includes(searchTerm);
@@ -43,6 +38,11 @@ export async function getStudentById(id) {
   return students.find(s => s.id === id);
 }
 
+export async function getStudentByRoll(roll) {
+  const students = await loadStudentsData();
+  return students.find(s => (s.roll || '').toString() === roll);
+}
+
 export async function createStudent(studentData) {
   // In prototype: add to local array
   const students = await loadStudentsData();
@@ -52,6 +52,28 @@ export async function createStudent(studentData) {
   };
   students.push(newStudent);
   return newStudent;
+}
+
+export async function updateStudent(roll, studentData) {
+  // In prototype: update in local array
+  const students = await loadStudentsData();
+  const index = students.findIndex(s => (s.roll || '').toString() === roll);
+  if (index !== -1) {
+    students[index] = { ...students[index], ...studentData };
+    return students[index];
+  }
+  throw new Error('Student not found');
+}
+
+export async function deleteStudent(roll) {
+  // In prototype: remove from local array
+  const students = await loadStudentsData();
+  const index = students.findIndex(s => (s.roll || '').toString() === roll);
+  if (index !== -1) {
+    students.splice(index, 1);
+    return { success: true };
+  }
+  throw new Error('Student not found');
 }
 
 export async function bulkImportStudents(studentsArray) {

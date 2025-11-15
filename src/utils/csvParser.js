@@ -23,7 +23,7 @@ export function validateStudentRow(row, fieldMapping) {
   const errors = [];
   
   // Check required fields
-  const requiredFields = ['roll', 'firstName', 'lastName', 'phone', 'batch', 'branch'];
+  const requiredFields = ['roll', 'name', 'phone', 'batch', 'branch'];
   requiredFields.forEach(field => {
     const mappedField = fieldMapping[field];
     if (!mappedField || !row[mappedField] || row[mappedField].trim() === '') {
@@ -65,9 +65,7 @@ export function mapCSVRowToStudent(row, fieldMapping) {
   return {
     id: `S${Date.now()}${Math.random().toString(36).substr(2, 4)}`,
     roll: row[fieldMapping.roll] || '',
-    firstName: row[fieldMapping.firstName] || '',
-    lastName: row[fieldMapping.lastName] || '',
-    name: row[fieldMapping.name] || '', // Fallback for old data
+    name: row[fieldMapping.name] || '',
     phone: row[fieldMapping.phone] || '',
     email: row[fieldMapping.email] || '',
     batch: row[fieldMapping.batch] || '',
@@ -76,6 +74,12 @@ export function mapCSVRowToStudent(row, fieldMapping) {
     section: row[fieldMapping.section] || '',
     year: parseInt(row[fieldMapping.year]) || 1,
     gender: row[fieldMapping.gender] || '',
+    category: row[fieldMapping.category] || '',
+    motherName: row[fieldMapping.motherName] || '',
+    fatherName: row[fieldMapping.fatherName] || '',
+    isLE: row[fieldMapping.isLE] === 'true' || row[fieldMapping.isLE] === true,
+    isLeft: row[fieldMapping.isLeft] === 'true' || row[fieldMapping.isLeft] === true,
+    isCR: row[fieldMapping.isCR] === 'true' || row[fieldMapping.isCR] === true,
     notes: row[fieldMapping.notes] || ''
   };
 }

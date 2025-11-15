@@ -6,8 +6,7 @@ import { useApp } from '../../context/AppContext';
 
 const defaultFieldMapping = {
   roll: 'roll',
-  firstName: 'firstName',
-  lastName: 'lastName',
+  name: 'name',
   phone: 'phone',
   email: 'email',
   batch: 'batch',
@@ -16,6 +15,12 @@ const defaultFieldMapping = {
   section: 'section',
   year: 'year',
   gender: 'gender',
+  category: 'category',
+  motherName: 'motherName',
+  fatherName: 'fatherName',
+  isLE: 'isLE',
+  isLeft: 'isLeft',
+  isCR: 'isCR',
   notes: 'notes'
 };
 
@@ -109,7 +114,7 @@ export default function BulkUploadPage() {
           <div className="mb-4">
             <h2 className="text-xl font-bold text-gray-900 mb-2">Upload CSV File</h2>
             <p className="text-base text-muted mb-4">
-              Your CSV file should contain columns for: Roll Number (11 digits), First Name, Last Name, Phone (10 digits), Email, Batch, Branch, Course, Section, Year, Gender, Notes
+              Your CSV file should contain columns for: Roll Number (11 digits), Name, Phone (10 digits), Email, Batch, Branch, Course, Section, Year, Gender, Category, Mother Name, Father Name, Notes
             </p>
           </div>
 
@@ -147,9 +152,7 @@ export default function BulkUploadPage() {
               {Object.keys(defaultFieldMapping).map((field) => (
                 <div key={field}>
                   <label className="label capitalize">
-                    {field === 'firstName' ? 'First Name' : 
-                     field === 'lastName' ? 'Last Name' : 
-                     field}
+                    {field}
                   </label>
                   <select
                     value={fieldMapping[field]}
@@ -177,8 +180,7 @@ export default function BulkUploadPage() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-3 py-2 text-left">Roll</th>
-                    <th className="px-3 py-2 text-left">First Name</th>
-                    <th className="px-3 py-2 text-left">Last Name</th>
+                    <th className="px-3 py-2 text-left">Name</th>
                     <th className="px-3 py-2 text-left">Batch</th>
                     <th className="px-3 py-2 text-left">Branch</th>
                   </tr>
@@ -187,8 +189,7 @@ export default function BulkUploadPage() {
                   {previewRows.map((row, idx) => (
                     <tr key={idx} className="border-b">
                       <td className="px-3 py-2">{row[fieldMapping.roll] || '-'}</td>
-                      <td className="px-3 py-2">{row[fieldMapping.firstName] || '-'}</td>
-                      <td className="px-3 py-2">{row[fieldMapping.lastName] || '-'}</td>
+                      <td className="px-3 py-2">{row[fieldMapping.name] || '-'}</td>
                       <td className="px-3 py-2">{row[fieldMapping.batch] || '-'}</td>
                       <td className="px-3 py-2">{row[fieldMapping.branch] || '-'}</td>
                     </tr>

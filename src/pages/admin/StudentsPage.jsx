@@ -16,8 +16,7 @@ export default function StudentsPage() {
   const [showBulkInsideModal, setShowBulkInsideModal] = useState(false);
   const [formData, setFormData] = useState({
     roll: '',
-    firstName: '',
-    lastName: '',
+    name: '',
     phone: '',
     email: '',
     batch: '',
@@ -26,6 +25,12 @@ export default function StudentsPage() {
     section: '',
     year: 1,
     gender: '',
+    category: '',
+    motherName: '',
+    fatherName: '',
+    isLE: false,
+    isLeft: false,
+    isCR: false,
     notes: ''
   });
 
@@ -44,8 +49,7 @@ export default function StudentsPage() {
       setShowAddModal(false);
       setFormData({
         roll: '',
-        firstName: '',
-        lastName: '',
+        name: '',
         phone: '',
         email: '',
         batch: '',
@@ -54,6 +58,12 @@ export default function StudentsPage() {
         section: '',
         year: 1,
         gender: '',
+        category: '',
+        motherName: '',
+        fatherName: '',
+        isLE: false,
+        isLeft: false,
+        isCR: false,
         notes: ''
       });
       alert('Student added successfully!');
@@ -150,26 +160,14 @@ export default function StudentsPage() {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Personal Information</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="label">First Name *</label>
+                      <label className="label">Name *</label>
                       <input
                         type="text"
                         required
-                        value={formData.firstName}
-                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="input-field"
-                        placeholder="Enter first name"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="label">Last Name *</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.lastName}
-                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        className="input-field"
-                        placeholder="Enter last name"
+                        placeholder="Enter full name"
                       />
                     </div>
 
@@ -309,6 +307,84 @@ export default function StudentsPage() {
                         <option value="Other">Other</option>
                       </select>
                     </div>
+
+                    <div>
+                      <label className="label">Category</label>
+                      <select
+                        value={formData.category}
+                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                        className="input-field"
+                      >
+                        <option value="">Select Category</option>
+                        <option value="GEN">GEN</option>
+                        <option value="OBC">OBC</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="EWS">EWS</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Family Information Section */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Family Information</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="label">Father Name</label>
+                      <input
+                        type="text"
+                        value={formData.fatherName}
+                        onChange={(e) => setFormData({ ...formData, fatherName: e.target.value })}
+                        className="input-field"
+                        placeholder="Enter father's name"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="label">Mother Name</label>
+                      <input
+                        type="text"
+                        value={formData.motherName}
+                        onChange={(e) => setFormData({ ...formData, motherName: e.target.value })}
+                        className="input-field"
+                        placeholder="Enter mother's name"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Remarks Section */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Remarks</h3>
+                  <div className="space-y-3">
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.isLE}
+                        onChange={(e) => setFormData({ ...formData, isLE: e.target.checked })}
+                        className="w-5 h-5 text-brand border-gray-300 rounded focus:ring-brand"
+                      />
+                      <span className="text-base text-gray-900">LE Student (Leave of Absence/Lateral Entry)</span>
+                    </label>
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.isLeft}
+                        onChange={(e) => setFormData({ ...formData, isLeft: e.target.checked })}
+                        className="w-5 h-5 text-brand border-gray-300 rounded focus:ring-brand"
+                      />
+                      <span className="text-base text-gray-900">Left Student (Discontinued)</span>
+                    </label>
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.isCR}
+                        onChange={(e) => setFormData({ ...formData, isCR: e.target.checked })}
+                        className="w-5 h-5 text-brand border-gray-300 rounded focus:ring-brand"
+                      />
+                      <span className="text-base text-gray-900">Class Representative (CR)</span>
+                    </label>
                   </div>
                 </div>
 

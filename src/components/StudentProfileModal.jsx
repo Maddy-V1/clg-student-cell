@@ -4,9 +4,6 @@ export default function StudentProfileModal({ student, onClose }) {
   if (!student) return null;
 
   const getStudentName = () => {
-    if (student.firstName && student.lastName) {
-      return `${student.firstName} ${student.lastName}`;
-    }
     return student.name || 'N/A';
   };
 
@@ -39,29 +36,15 @@ export default function StudentProfileModal({ student, onClose }) {
           <div className="mb-6">
             <h4 className="text-xl font-bold text-gray-900 mb-4">Personal Information</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {student.firstName && (
-                <div className="flex items-start gap-3">
-                  <User size={20} className="text-brand mt-1" />
-                  <div>
-                    <p className="text-sm text-muted mb-1">First Name</p>
-                    <p className="text-base font-medium text-gray-900">
-                      {student.firstName}
-                    </p>
-                  </div>
+              <div className="flex items-start gap-3">
+                <User size={20} className="text-brand mt-1" />
+                <div>
+                  <p className="text-sm text-muted mb-1">Name</p>
+                  <p className="text-base font-medium text-gray-900">
+                    {student.name || '-'}
+                  </p>
                 </div>
-              )}
-
-              {student.lastName && (
-                <div className="flex items-start gap-3">
-                  <User size={20} className="text-brand mt-1" />
-                  <div>
-                    <p className="text-sm text-muted mb-1">Last Name</p>
-                    <p className="text-base font-medium text-gray-900">
-                      {student.lastName}
-                    </p>
-                  </div>
-                </div>
-              )}
+              </div>
 
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-brand mt-1" />

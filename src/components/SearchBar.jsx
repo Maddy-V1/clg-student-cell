@@ -93,9 +93,7 @@ export default function SearchBar() {
                   </div>
                   <div className="flex-1">
                     <p className="text-base font-medium text-gray-900">
-                      {student.firstName && student.lastName 
-                        ? `${student.firstName} ${student.lastName}`
-                        : student.name || 'N/A'}
+                      {student.name || 'N/A'}
                     </p>
                     <p className="text-sm text-muted">
                       {student.roll} • {student.branch || student.course}
