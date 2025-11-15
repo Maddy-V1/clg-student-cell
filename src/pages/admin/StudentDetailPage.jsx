@@ -42,7 +42,7 @@ export default function StudentDetailPage() {
     branch: '',
     course: '',
     section: '',
-    year: 1,
+    dob: '',
     gender: '',
     category: '',
     motherName: '',
@@ -65,7 +65,7 @@ export default function StudentDetailPage() {
         branch: student.branch || '',
         course: student.course || '',
         section: student.section || '',
-        year: student.year || 1,
+        dob: student.dob || '',
         gender: student.gender || '',
         category: student.category || '',
         motherName: student.motherName || '',
@@ -142,7 +142,7 @@ export default function StudentDetailPage() {
         branch: student.branch || '',
         course: student.course || '',
         section: student.section || '',
-        year: student.year || 1,
+        dob: student.dob || '',
         gender: student.gender || '',
         category: student.category || '',
         motherName: student.motherName || '',
@@ -298,6 +298,15 @@ export default function StudentDetailPage() {
                     />
                   </div>
                   <div>
+                    <label className="label">Date of Birth</label>
+                    <input
+                      type="date"
+                      value={formData.dob}
+                      onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
+                      className="input-field"
+                    />
+                  </div>
+                  <div>
                     <label className="label">Gender</label>
                     <select
                       value={formData.gender}
@@ -383,21 +392,11 @@ export default function StudentDetailPage() {
                       className="input-field"
                     >
                       <option value="">Select Section</option>
+                      <option value="No Sections">No Sections</option>
                       {sections.map(section => (
                         <option key={section} value={section}>Section {section}</option>
                       ))}
                     </select>
-                  </div>
-                  <div>
-                    <label className="label">Year</label>
-                    <input
-                      type="number"
-                      min="1"
-                      max="4"
-                      value={formData.year}
-                      onChange={(e) => setFormData({ ...formData, year: parseInt(e.target.value) || 1 })}
-                      className="input-field"
-                    />
                   </div>
                 </div>
               </div>
@@ -475,10 +474,30 @@ export default function StudentDetailPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
+                  <Calendar size={20} className="text-brand mt-1" />
+                  <div>
+                    <p className="text-sm text-muted mb-1">Date of Birth</p>
+                    <p className="text-base font-medium text-gray-900">
+                      {student.dob ? new Date(student.dob).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '-'}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
                   <User size={20} className="text-brand mt-1" />
                   <div>
                     <p className="text-sm text-muted mb-1">Gender</p>
                     <p className="text-base font-medium text-gray-900">{student.gender || '-'}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <User size={20} className="text-brand mt-1" />
+                  <div>
+                    <p className="text-sm text-muted mb-1">Status</p>
+                    <p className="text-base font-medium text-gray-900">
+                      <span className={`px-2 py-1 rounded-full text-xs font-semibold ${student.isLeft ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
+                        {student.isLeft ? 'Left' : 'Attending'}
+                      </span>
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -519,18 +538,11 @@ export default function StudentDetailPage() {
                   <User size={20} className="text-brand mt-1" />
                   <div>
                     <p className="text-sm text-muted mb-1">Section</p>
-                    <p className="text-base font-medium text-gray-900">{student.section ? `Section ${student.section}` : '-'}</p>
+                    <p className="text-base font-medium text-gray-900">
+                      {student.section === 'No Sections' ? 'No Sections' : student.section ? `Section ${student.section}` : '-'}
+                    </p>
                   </div>
                 </div>
-                {student.year && (
-                  <div className="flex items-start gap-3">
-                    <Calendar size={20} className="text-brand mt-1" />
-                    <div>
-                      <p className="text-sm text-muted mb-1">Year</p>
-                      <p className="text-base font-medium text-gray-900">{student.year}</p>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           </div>

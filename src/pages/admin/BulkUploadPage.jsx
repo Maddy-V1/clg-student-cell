@@ -13,7 +13,7 @@ const defaultFieldMapping = {
   branch: 'branch',
   course: 'course',
   section: 'section',
-  year: 'year',
+  dob: 'dob',
   gender: 'gender',
   category: 'category',
   motherName: 'motherName',
@@ -114,7 +114,7 @@ export default function BulkUploadPage() {
           <div className="mb-4">
             <h2 className="text-xl font-bold text-gray-900 mb-2">Upload CSV File</h2>
             <p className="text-base text-muted mb-4">
-              Your CSV file should contain columns for: Roll Number (11 digits), Name, Phone (10 digits), Email, Batch, Branch, Course, Section, Year, Gender, Category, Mother Name, Father Name, Notes
+              Your CSV file should contain columns for: Roll Number (11 digits), Name, Phone (10 digits), Email, Batch, Branch, Course, Section, Date of Birth (DOB), Gender, Category, Mother Name, Father Name, Notes
             </p>
           </div>
 

@@ -65,6 +65,16 @@ export default function StudentProfileModal({ student, onClose }) {
                   </p>
                 </div>
               </div>
+
+              <div className="flex items-start gap-3">
+                <Calendar size={20} className="text-brand mt-1" />
+                <div>
+                  <p className="text-sm text-muted mb-1">Date of Birth</p>
+                  <p className="text-base font-medium text-gray-900">
+                    {student.dob ? new Date(student.dob).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '-'}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -107,22 +117,10 @@ export default function StudentProfileModal({ student, onClose }) {
                 <div>
                   <p className="text-sm text-muted mb-1">Section</p>
                   <p className="text-base font-medium text-gray-900">
-                    {student.section ? `Section ${student.section}` : 'N/A'}
+                    {student.section === 'No Sections' ? 'No Sections' : student.section ? `Section ${student.section}` : 'N/A'}
                   </p>
                 </div>
               </div>
-
-              {student.year && (
-                <div className="flex items-start gap-3">
-                  <Calendar size={20} className="text-brand mt-1" />
-                  <div>
-                    <p className="text-sm text-muted mb-1">Year</p>
-                    <p className="text-base font-medium text-gray-900">
-                      {student.year}
-                    </p>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
 

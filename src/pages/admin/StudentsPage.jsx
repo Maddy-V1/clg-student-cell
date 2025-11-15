@@ -23,7 +23,7 @@ export default function StudentsPage() {
     branch: '',
     course: '',
     section: '',
-    year: 1,
+    dob: '',
     gender: '',
     category: '',
     motherName: '',
@@ -56,7 +56,7 @@ export default function StudentsPage() {
         branch: '',
         course: '',
         section: '',
-        year: 1,
+        dob: '',
         gender: '',
         category: '',
         motherName: '',
@@ -216,6 +216,16 @@ export default function StudentsPage() {
                         placeholder="Enter email address"
                       />
                     </div>
+
+                    <div>
+                      <label className="label">Date of Birth</label>
+                      <input
+                        type="date"
+                        value={formData.dob}
+                        onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
+                        className="input-field"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -276,22 +286,11 @@ export default function StudentsPage() {
                         className="input-field"
                       >
                         <option value="">Select Section</option>
+                        <option value="No Sections">No Sections</option>
                         {sections.map(section => (
                           <option key={section} value={section}>Section {section}</option>
                         ))}
                       </select>
-                    </div>
-
-                    <div>
-                      <label className="label">Year</label>
-                      <input
-                        type="number"
-                        min="1"
-                        max="4"
-                        value={formData.year}
-                        onChange={(e) => setFormData({ ...formData, year: parseInt(e.target.value) || 1 })}
-                        className="input-field"
-                      />
                     </div>
 
                     <div>

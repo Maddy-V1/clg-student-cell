@@ -32,7 +32,6 @@ export default function StudentsTable({ students }) {
     course: true,
     branch: true,
     section: true,
-    year: true,
     isLE: false,
     isCR: false,
     isLeft: false
@@ -221,8 +220,7 @@ export default function StudentsTable({ students }) {
         if (selectedColumns.batch) row.push(student.batch || '-');
         if (selectedColumns.course) row.push(student.course || '-');
         if (selectedColumns.branch) row.push(student.branch || '-');
-        if (selectedColumns.section) row.push(student.section || '-');
-        if (selectedColumns.year) row.push(student.year || '-');
+        if (selectedColumns.section) row.push(student.section === 'No Sections' ? 'No Sections' : student.section || '-');
         if (selectedColumns.isLE) row.push(student.isLE ? 'Yes' : 'No');
         if (selectedColumns.isCR) row.push(student.isCR ? 'Yes' : 'No');
         if (selectedColumns.isLeft) row.push(student.isLeft ? 'Yes' : 'No');
@@ -243,7 +241,6 @@ export default function StudentsTable({ students }) {
       if (selectedColumns.course) headers.push('Course');
       if (selectedColumns.branch) headers.push('Branch');
       if (selectedColumns.section) headers.push('Section');
-      if (selectedColumns.year) headers.push('Year');
       if (selectedColumns.isLE) headers.push('LE Student');
       if (selectedColumns.isCR) headers.push('Class Rep');
       if (selectedColumns.isLeft) headers.push('Left Student');
@@ -306,8 +303,7 @@ export default function StudentsTable({ students }) {
         if (selectedColumns.batch) row['Batch'] = student.batch || '-';
         if (selectedColumns.course) row['Course'] = student.course || '-';
         if (selectedColumns.branch) row['Branch'] = student.branch || '-';
-        if (selectedColumns.section) row['Section'] = student.section || '-';
-        if (selectedColumns.year) row['Year'] = student.year || '-';
+        if (selectedColumns.section) row['Section'] = student.section === 'No Sections' ? 'No Sections' : student.section || '-';
         if (selectedColumns.isLE) row['LE Student'] = student.isLE ? 'Yes' : 'No';
         if (selectedColumns.isCR) row['Class Rep'] = student.isCR ? 'Yes' : 'No';
         if (selectedColumns.isLeft) row['Left Student'] = student.isLeft ? 'Yes' : 'No';
@@ -339,7 +335,6 @@ export default function StudentsTable({ students }) {
       if (selectedColumns.course) colWidths.push({ wch: 15 });
       if (selectedColumns.branch) colWidths.push({ wch: 15 });
       if (selectedColumns.section) colWidths.push({ wch: 10 });
-      if (selectedColumns.year) colWidths.push({ wch: 8 });
       if (selectedColumns.isLE) colWidths.push({ wch: 12 });
       if (selectedColumns.isCR) colWidths.push({ wch: 12 });
       if (selectedColumns.isLeft) colWidths.push({ wch: 12 });
@@ -627,7 +622,7 @@ export default function StudentsTable({ students }) {
                         {student.branch || 'N/A'}
                       </td>
                       <td className="px-4 py-3 text-base text-gray-700">
-                        {student.section ? `Section ${student.section}` : 'N/A'}
+                        {student.section === 'No Sections' ? 'No Sections' : student.section ? `Section ${student.section}` : 'N/A'}
                       </td>
                       <td className="px-4 py-3 text-base text-gray-700">
                         <div className="flex gap-1 flex-wrap">
@@ -848,15 +843,6 @@ export default function StudentsTable({ students }) {
                           className="w-5 h-5 text-brand border-gray-300 rounded focus:ring-brand"
                         />
                         <span className="text-base text-gray-900">Section</span>
-                      </label>
-                      <label className="flex items-center gap-3 cursor-pointer p-2 hover:bg-gray-50 rounded-lg">
-                        <input
-                          type="checkbox"
-                          checked={selectedColumns.year}
-                          onChange={(e) => setSelectedColumns({ ...selectedColumns, year: e.target.checked })}
-                          className="w-5 h-5 text-brand border-gray-300 rounded focus:ring-brand"
-                        />
-                        <span className="text-base text-gray-900">Year</span>
                       </label>
                     </div>
                   </div>

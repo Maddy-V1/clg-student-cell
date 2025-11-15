@@ -72,7 +72,7 @@ export function mapCSVRowToStudent(row, fieldMapping) {
     branch: branch,
     course: row[fieldMapping.course] || courseMap[branch] || '',
     section: row[fieldMapping.section] || '',
-    year: parseInt(row[fieldMapping.year]) || 1,
+    dob: row[fieldMapping.dob] || '',
     gender: row[fieldMapping.gender] || '',
     category: row[fieldMapping.category] || '',
     motherName: row[fieldMapping.motherName] || '',
